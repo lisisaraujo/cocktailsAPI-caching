@@ -2,6 +2,7 @@ package com.example.cachingproject.ui
 
 import CocktailAdapter
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +33,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.nextPageBTN.setOnClickListener {
+            Log.d("NextPage", viewModel.cocktails.value.toString() )
             viewModel.loadNextPage()
         }
     }

@@ -32,7 +32,7 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
         viewModelScope.launch {
             try {
                 repository.getCocktails(letter)
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 Log.d(TAG, "Error Loading Data $e")
             }
         }
@@ -42,11 +42,11 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
         if (letterPosition < letters.size - 1) {
             letterPosition++
         } else {
-            // Reset to the beginning of the list when reaching the end
             letterPosition = 0
         }
         val nextLetter = letters[letterPosition]
         loadData(nextLetter)
     }
 }
+
 

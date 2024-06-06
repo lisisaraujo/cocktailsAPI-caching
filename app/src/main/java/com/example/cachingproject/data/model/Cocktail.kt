@@ -12,5 +12,9 @@ data class Cocktail(
     @Json(name = "strDrink")
     val name: String?,
     @Json(name = "strDrinkThumb")
-    val image: String?
+    val image: String?,
+
+//    @Json(name = "strCategory")
+//    val category: String
+
 )

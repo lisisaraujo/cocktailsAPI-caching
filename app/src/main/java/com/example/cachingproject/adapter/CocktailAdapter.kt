@@ -33,6 +33,7 @@ class CocktailAdapter(private var items: List<Cocktail>) :
             .into(holder.binding.cocktailImageView)
 
         holder.binding.cocktailNameTextView.text = cocktail.name
+//        holder.binding.cocktailCategoryTextView.text = cocktail.category
 
     }
 

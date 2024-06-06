@@ -18,7 +18,8 @@ class AppRepository(private val api: CocktailsApi, private val database: Cocktai
         Log.d(TAG, cocktails.value.toString())
         try {
             withContext(Dispatchers.IO){
-                val newCocktailsList = api.cocktailsApiService.getCocktails().drinks
+                val newCocktailsList = api.cocktailsApiService.getCocktails('a').drinks
+                database.cocktailDao.deleteCocktails()
                 database.cocktailDao.insertCocktailsList(newCocktailsList)
                 Log.d("CocktailsList", newCocktailsList.toString())
             }
@@ -27,5 +28,6 @@ class AppRepository(private val api: CocktailsApi, private val database: Cocktai
             Log.e(TAG, "Error loading cocktails list", e)
         }
     }
+
 }
 
