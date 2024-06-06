@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/list_item_cocktail">
+        tools:listitem="@layout/list_item_cocktail"
+        android:background="@color/cardview_light_background">
 
     </androidx.recyclerview.widget.RecyclerView>
 

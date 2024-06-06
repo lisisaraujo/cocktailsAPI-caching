@@ -19,27 +19,34 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
     private val database = getDatabase(application)
     private val repository = AppRepository(CocktailsApi, database)
 
-//    private val _loading = MutableLiveData<ApiStatus>()
-//    val loading: LiveData<ApiStatus>
-//        get() = _loading
+    val letters: List<Char> = ('a'..'z').toList()
+    var letterPosition = 0
 
-val cocktails = repository.cocktails
+    val cocktails = repository.cocktails
+
     init {
-        loadData()
-        Log.d(TAG, database.toString())
+        loadData(letters[letterPosition])
     }
 
-    fun loadData() {
+    fun loadData(letter: Char) {
         viewModelScope.launch {
-//
             try {
-                repository.getCocktails()
-//
+                repository.getCocktails(letter)
             } catch (e: Exception){
                 Log.d(TAG, "Error Loading Data $e")
             }
         }
     }
 
-
+    fun loadNextPage() {
+        if (letterPosition < letters.size - 1) {
+            letterPosition++
+        } else {
+            // Reset to the beginning of the list when reaching the end
+            letterPosition = 0
+        }
+        val nextLetter = letters[letterPosition]
+        loadData(nextLetter)
+    }
 }
+

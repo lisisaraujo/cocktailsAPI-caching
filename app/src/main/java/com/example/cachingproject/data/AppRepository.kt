@@ -14,7 +14,7 @@ class AppRepository(private val api: CocktailsApi, private val database: Cocktai
 
     val cocktails: LiveData<List<Cocktail>> = database.cocktailDao.getCocktails()
 
-    suspend fun getCocktails() {
+    suspend fun getCocktails(letter: Char) {
         Log.d(TAG, cocktails.value.toString())
         try {
             withContext(Dispatchers.IO){

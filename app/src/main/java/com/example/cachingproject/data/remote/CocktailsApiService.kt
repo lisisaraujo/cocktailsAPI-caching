@@ -22,7 +22,7 @@ val retrofit: Retrofit = Retrofit.Builder()
 interface CocktailsApiService {
     @GET("search.php")
     suspend fun getCocktails(
-        @Query("f") letter: Char = 'a',
+        @Query("f") letter: Char = 'c',
     ): CocktailsList
 
 }

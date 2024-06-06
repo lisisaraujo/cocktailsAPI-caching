@@ -24,17 +24,15 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.loadData()
-
-        // Test Teilaufgabe 2
-        viewModel.cocktails.observe(viewLifecycleOwner){
-            binding.rvCocktailsList.adapter = CocktailAdapter(it)
+        viewModel.cocktails.observe(viewLifecycleOwner) { cocktails ->
+            binding.rvCocktailsList.adapter = CocktailAdapter(cocktails)
         }
 
+        binding.nextPageBTN.setOnClickListener {
+            viewModel.loadNextPage()
+        }
     }
-
 }
