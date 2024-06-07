@@ -32,7 +32,11 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val itemClickedCallback: (Cocktail) -> Unit = {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(it.id))
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToDetailsFragment(
+                    it.id
+                )
+            )
         }
 
         val currentLetter = viewModel.letters[viewModel.letterPosition]

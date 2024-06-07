@@ -31,7 +31,7 @@ class CocktailAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val cocktail = items[position]
 
-        holder.binding.listIV.load(cocktail.image){
+        holder.binding.listIV.load(cocktail.image) {
             crossfade(true)
             placeholder(R.drawable.ic_launcher_foreground)
         }
@@ -41,9 +41,8 @@ class CocktailAdapter(
         holder.binding.listAlcoholicTV.text = cocktail.alcoholic
 
         holder.binding.listCV.setOnClickListener {
-            itemClickedCallback(cocktail)
             Log.d("ClickedCocktail", cocktail.name.toString())
-            it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(cocktail.id))
+            itemClickedCallback(cocktail)
         }
 
     }
