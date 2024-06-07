@@ -9,16 +9,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 const val TAG = "AppRepository"
+
 class AppRepository(private val api: CocktailsApi, private val database: CocktailDatabase) {
 
 
     val cocktails: LiveData<List<Cocktail>> = database.cocktailDao.getCocktails()
 
+
+    fun getCocktailDetails(cocktailID: String) = database.cocktailDao.getCocktail(cocktailID)
+
     suspend fun getCocktails(letter: Char) {
         Log.d(TAG, cocktails.value.toString())
         try {
-            withContext(Dispatchers.IO){
-                val newCocktailsList = api.cocktailsApiService.getCocktails('a').drinks
+            withContext(Dispatchers.IO) {
+                val newCocktailsList = api.cocktailsApiService.getCocktails(letter).drinks
                 database.cocktailDao.deleteCocktails()
                 database.cocktailDao.insertCocktailsList(newCocktailsList)
                 Log.d("CocktailsList", newCocktailsList.toString())

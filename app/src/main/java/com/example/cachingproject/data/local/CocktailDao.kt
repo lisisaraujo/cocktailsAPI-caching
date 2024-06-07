@@ -14,6 +14,9 @@ interface CocktailDao {
     @Query("SELECT * FROM cocktail_table")
     fun getCocktails() : LiveData<List<Cocktail>>
 
+    @Query("SELECT * FROM cocktail_table WHERE id=:cocktailID")
+    fun getCocktail(cocktailID: String) : LiveData<Cocktail>
+
     @Query("DELETE FROM cocktail_table")
     fun deleteCocktails()
 
