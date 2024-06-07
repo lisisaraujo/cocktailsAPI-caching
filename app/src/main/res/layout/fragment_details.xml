@@ -61,7 +61,8 @@
                     app:layout_constraintTop_toBottomOf="@id/detailImageView"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    tools:text="Margarita" />
+                    tools:text="Margarita"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/detailCategoryTextView"
@@ -75,7 +76,7 @@
                     app:layout_constraintTop_toBottomOf="@id/detailNameTextView"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    tools:text="Category: Cocktail" />
+                    tools:text="" />
 
                 <TextView
                     android:id="@+id/detailAlcoholicTextView"
@@ -103,10 +104,11 @@
                     app:layout_constraintTop_toBottomOf="@id/detailAlcoholicTextView"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:textStyle="bold"
                     tools:text="Glass:" />
 
                 <TextView
-                    android:id="@+id/detailGlassTextView"
+                    android:id="@+id/detailGlassTV"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -120,21 +122,22 @@
                     tools:text="Cocktail Glass" />
 
                 <TextView
-                    android:id="@+id/detailDescriptionLabelTextView"
+                    android:id="@+id/detailDescriptionLabelTV"
                     android:layout_width="0dp"
+                    android:textStyle="bold"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:textAppearance="?attr/textAppearanceBody1"
                     android:textColor="@color/black"
-                    app:layout_constraintTop_toBottomOf="@id/detailGlassTextView"
+                    app:layout_constraintTop_toBottomOf="@id/detailGlassTV"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:text="Description:" />
 
                 <TextView
-                    android:id="@+id/detailDescriptionTextView"
+                    android:id="@+id/detailDescriptionTV"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -143,7 +146,7 @@
                     android:layout_marginBottom="16dp"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="@color/black"
-                    app:layout_constraintTop_toBottomOf="@id/detailDescriptionLabelTextView"
+                    app:layout_constraintTop_toBottomOf="@id/detailDescriptionLabelTV"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:text="A margarita is a cocktail consisting of tequila, orange liqueur, and lime juice often served with salt on the rim of the glass." />

@@ -41,7 +41,7 @@ class CocktailAdapter(
         holder.binding.listAlcoholicTV.text = cocktail.alcoholic
 
         holder.binding.listCV.setOnClickListener {
-            Log.d("ClickedCocktail", cocktail.name.toString())
+            Log.d("ClickedCocktail", cocktail.instructions.toString())
             itemClickedCallback(cocktail)
         }
 

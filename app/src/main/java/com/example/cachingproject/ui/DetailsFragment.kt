@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.example.cachingproject.databinding.FragmentDetailsBinding
@@ -33,13 +34,23 @@ class DetailsFragment : Fragment() {
 
         val cocktailID = args.cocktailID
 
-       val cocktail = viewModel.getCocktailDetails(cocktailID)
 
-        binding.detailImageView.load(cocktail.value?.image)
-        binding.detailNameTextView.text = cocktail.value?.name
-        binding.detailGlassTextView.text = cocktail.value?.glass
-        binding.detailDescriptionTextView.text = cocktail.value?.instructions
-        binding.detailCategoryTextView.text = cocktail.value?.category
+       val cocktail = viewModel.getCocktailDetails(cocktailID).observe(viewLifecycleOwner){cocktail ->
+
+           binding.detailImageView.load(cocktail?.image)
+           binding.detailNameTextView.text = cocktail?.name
+           binding.detailGlassTV.text = cocktail?.glass
+           binding.detailDescriptionTV.text = cocktail?.instructions
+           binding.detailCategoryTextView.text = cocktail?.category
+           binding.detailAlcoholicTextView.text = cocktail.alcoholic
+           binding.nextPageBTN.setOnClickListener {
+               viewModel.loadNextCocktail()
+           }
+       }
+        binding.backButton.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
 
     }
 }
