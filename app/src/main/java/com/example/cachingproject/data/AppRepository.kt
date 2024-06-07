@@ -12,11 +12,7 @@ const val TAG = "AppRepository"
 
 class AppRepository(private val api: CocktailsApi, private val database: CocktailDatabase) {
 
-
     val cocktails: LiveData<List<Cocktail>> = database.cocktailDao.getCocktails()
-
-
-    fun getCocktailDetails(cocktailID: String) = database.cocktailDao.getCocktail(cocktailID)
 
     suspend fun getCocktails(letter: Char) {
         Log.d(TAG, cocktails.value.toString())
@@ -33,5 +29,11 @@ class AppRepository(private val api: CocktailsApi, private val database: Cocktai
         }
     }
 
+    fun getCocktailDetails(cocktailID: String) = database.cocktailDao.getCocktail(cocktailID)
+
+
+    suspend fun getRandomCocktail(): Cocktail {
+        return database.cocktailDao.getCocktailsAsList().random()
+    }
 }
 

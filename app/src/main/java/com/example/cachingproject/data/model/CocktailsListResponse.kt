@@ -1,6 +1,6 @@
 package com.example.cachingproject.data.model
 
-class CocktailsList(
+class CocktailsListResponse(
     val drinks: List<Cocktail>
 ) {
 }

@@ -16,12 +16,10 @@ class DetailsViewModel(application: Application) : AndroidViewModel(application)
 
     private val database = getDatabase(application)
     private val repository = AppRepository(CocktailsApi, database)
-    private val cocktails = repository.cocktails
-
+    private val cocktails = database.cocktailDao.getCocktails()
 
 
     fun getCocktailDetails(cocktailID: String): LiveData<Cocktail> {
-
         viewModelScope.launch {
             repository.getCocktailDetails(cocktailID)
         }
@@ -29,14 +27,13 @@ class DetailsViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun loadNextCocktail(): LiveData<Cocktail> {
-        val randomCocktail = cocktails.value?.random()
-        Log.d("RandomCocktail", randomCocktail?.name.toString())
+        val randomCocktail: MutableLiveData<Cocktail> = MutableLiveData()
 
-        return if (randomCocktail != null) {
-            getCocktailDetails(randomCocktail.id)
-        } else {
-            MutableLiveData<Cocktail>(null)
+        viewModelScope.launch {
+            randomCocktail.value = repository.getRandomCocktail()
+            Log.d("RandomCocktail", randomCocktail.value.toString())
         }
+        return randomCocktail
     }
 
 }

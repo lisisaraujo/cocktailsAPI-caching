@@ -39,20 +39,32 @@ class HomeFragment : Fragment() {
             )
         }
 
-        val currentLetter = viewModel.letters[viewModel.letterPosition]
+        val currentLetter = viewModel.letters[viewModel.letterPosition.value!!]
+
         viewModel.loadData(currentLetter)
+
+
+        viewModel.letterPosition.observe(viewLifecycleOwner) { position ->
+            val currentLetter = viewModel.letters[position]
+            binding.letterTextView.text = currentLetter.toString().uppercase()
+        }
 
         viewModel.cocktails.observe(viewLifecycleOwner) { cocktails ->
             binding.rvCocktailsList.adapter = CocktailAdapter(cocktails, itemClickedCallback)
+
+
+            binding.nextPageBTN.setOnClickListener {
+                Log.d("NextPage", viewModel.cocktails.value.toString())
+                viewModel.loadNextPage()
+            }
+
+            binding.previousPageBTN.setOnClickListener {
+                viewModel.loadPrevPage()
+            }
         }
 
-        binding.nextPageBTN.setOnClickListener {
-            Log.d("NextPage", viewModel.cocktails.value.toString())
-            viewModel.loadNextPage()
-        }
 
-        binding.previousPageBTN.setOnClickListener {
-            viewModel.loadPrevPage()
-        }
+
+
     }
 }

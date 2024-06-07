@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
+import com.example.cachingproject.data.model.Cocktail
 import com.example.cachingproject.databinding.FragmentDetailsBinding
 import com.example.cachingproject.ui.viewModels.DetailsViewModel
 
@@ -34,23 +35,27 @@ class DetailsFragment : Fragment() {
 
         val cocktailID = args.cocktailID
 
-
-       val cocktail = viewModel.getCocktailDetails(cocktailID).observe(viewLifecycleOwner){cocktail ->
-
-           binding.detailImageView.load(cocktail?.image)
-           binding.detailNameTextView.text = cocktail?.name
-           binding.detailGlassTV.text = cocktail?.glass
-           binding.detailDescriptionTV.text = cocktail?.instructions
-           binding.detailCategoryTextView.text = cocktail?.category
-           binding.detailAlcoholicTextView.text = cocktail.alcoholic
-           binding.nextPageBTN.setOnClickListener {
-               viewModel.loadNextCocktail()
-           }
-       }
+        val cocktail =
+            viewModel.getCocktailDetails(cocktailID).observe(viewLifecycleOwner) { cocktail ->
+                bindCocktail(cocktail)
+            }
         binding.backButton.setOnClickListener {
             findNavController().navigateUp()
         }
 
+        binding.nextPageBTN.setOnClickListener {
+            viewModel.loadNextCocktail().observe(viewLifecycleOwner) { cocktail ->
+                bindCocktail(cocktail)
+            }
+        }
+    }
 
+    fun bindCocktail(cocktail: Cocktail) {
+        binding.detailImageView.load(cocktail?.image)
+        binding.detailNameTextView.text = cocktail?.name
+        binding.detailGlassTV.text = cocktail?.glass
+        binding.detailDescriptionTV.text = cocktail?.instructions
+        binding.detailCategoryTextView.text = cocktail?.category
+        binding.detailAlcoholicTextView.text = cocktail.alcoholic
     }
 }

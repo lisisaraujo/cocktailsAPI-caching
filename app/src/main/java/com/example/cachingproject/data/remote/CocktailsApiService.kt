@@ -1,6 +1,6 @@
 package com.example.cachingproject.data.remote
 
-import com.example.cachingproject.data.model.CocktailsList
+import com.example.cachingproject.data.model.CocktailsListResponse
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
@@ -23,7 +23,7 @@ interface CocktailsApiService {
     @GET("search.php")
     suspend fun getCocktails(
         @Query("f") letter: Char,
-    ): CocktailsList
+    ): CocktailsListResponse
 
 }
 

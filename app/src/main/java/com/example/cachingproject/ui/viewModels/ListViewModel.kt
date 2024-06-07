@@ -3,6 +3,8 @@ package com.example.cachingproject
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.cachingproject.data.AppRepository
 import com.example.cachingproject.data.local.getDatabase
@@ -10,19 +12,21 @@ import com.example.cachingproject.data.remote.CocktailsApi
 import kotlinx.coroutines.launch
 
 
-val TAG = "SharedViewModel"
+val TAG = "ListViewModel"
 
 class ListViewModel(application: Application) : AndroidViewModel(application) {
     private val database = getDatabase(application)
     private val repository = AppRepository(CocktailsApi, database)
 
     val letters: List<Char> = ('a'..'z').toList()
-    var letterPosition = 0
 
     val cocktails = repository.cocktails
 
+    private val _letterPosition = MutableLiveData(0)
+    val letterPosition: LiveData<Int> = _letterPosition
+
     init {
-        loadData(letters[letterPosition])
+        loadData(letters[letterPosition.value!!])
     }
 
     fun loadData(letter: Char) {
@@ -36,22 +40,22 @@ class ListViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun loadNextPage() {
-        if (letterPosition < letters.size - 1) {
-            letterPosition++
+        if (_letterPosition.value!! < letters.size - 1) {
+            _letterPosition.value = _letterPosition.value!! + 1
         } else {
-            letterPosition = 0
+            _letterPosition.value = 0
         }
-        val nextLetter = letters[letterPosition]
+        val nextLetter = letters[_letterPosition.value!!]
         loadData(nextLetter)
     }
 
     fun loadPrevPage() {
-        if (letterPosition > 0) {
-            letterPosition--
+        if (_letterPosition.value!! > 0) {
+            _letterPosition.value = _letterPosition.value!! - 1
         } else {
-            letterPosition = 0
+            _letterPosition.value = 0
         }
-        val nextLetter = letters[letterPosition]
+        val nextLetter = letters[_letterPosition.value!!]
         loadData(nextLetter)
     }
 }

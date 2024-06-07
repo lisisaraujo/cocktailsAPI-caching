@@ -9,21 +9,19 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_cocktails_list"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/buttonContainer"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/letterTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/list_item_cocktail"
-        android:background="@color/cardview_light_background">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        android:background="@color/cardview_light_background" />
 
     <LinearLayout
         android:id="@+id/buttonContainer"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
@@ -52,5 +50,19 @@
             android:textColor="@color/button_text_color" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/letterTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@color/cardview_light_background"
+        android:gravity="center"
+        android:padding="12dp"
+        android:text="A"
+        android:textAppearance="?attr/textAppearanceHeadline4"
+        android:textColor="@color/accent_color"
+        app:layout_constraintBottom_toBottomOf="@+id/rv_cocktails_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

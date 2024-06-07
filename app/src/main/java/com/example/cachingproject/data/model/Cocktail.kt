@@ -6,6 +6,7 @@ import com.squareup.moshi.Json
 
 @Entity(tableName = "cocktail_table")
 data class Cocktail(
+
     @PrimaryKey
     @Json(name = "idDrink")
     val id: String,
@@ -13,7 +14,6 @@ data class Cocktail(
     val name: String?,
     @Json(name = "strDrinkThumb")
     val image: String?,
-
     @Json(name = "strCategory")
     val category: String,
     @Json(name = "strAlcoholic")
